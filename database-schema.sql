@@ -1,0 +1,100 @@
+-- MySQL dump 10.19  Distrib 10.3.29-MariaDB, for debian-linux-gnueabihf (armv7l)
+--
+-- Host: localhost    Database: controldb
+-- ------------------------------------------------------
+-- Server version	10.3.29-MariaDB-0+deb10u1
+
+/*!40101 SET @OLD_CHARACTER_SET_CLIENT=@@CHARACTER_SET_CLIENT */;
+/*!40101 SET @OLD_CHARACTER_SET_RESULTS=@@CHARACTER_SET_RESULTS */;
+/*!40101 SET @OLD_COLLATION_CONNECTION=@@COLLATION_CONNECTION */;
+/*!40101 SET NAMES utf8mb4 */;
+/*!40103 SET @OLD_TIME_ZONE=@@TIME_ZONE */;
+/*!40103 SET TIME_ZONE='+00:00' */;
+/*!40014 SET @OLD_UNIQUE_CHECKS=@@UNIQUE_CHECKS, UNIQUE_CHECKS=0 */;
+/*!40014 SET @OLD_FOREIGN_KEY_CHECKS=@@FOREIGN_KEY_CHECKS, FOREIGN_KEY_CHECKS=0 */;
+/*!40101 SET @OLD_SQL_MODE=@@SQL_MODE, SQL_MODE='NO_AUTO_VALUE_ON_ZERO' */;
+/*!40111 SET @OLD_SQL_NOTES=@@SQL_NOTES, SQL_NOTES=0 */;
+
+--
+-- Table structure for table `EMPLEADOS`
+--
+
+DROP TABLE IF EXISTS `EMPLEADOS`;
+/*!40101 SET @saved_cs_client     = @@character_set_client */;
+/*!40101 SET character_set_client = utf8 */;
+CREATE TABLE `EMPLEADOS` (
+  `TRANSACCION` int(11) NOT NULL AUTO_INCREMENT,
+  `TARJETA` varchar(100) DEFAULT NULL,
+  `APELLIDOS` varchar(50) NOT NULL,
+  `NOMBRE` varchar(50) NOT NULL,
+  `CONTROL` varchar(1) NOT NULL,
+  `DNI` int(11) DEFAULT NULL,
+  PRIMARY KEY (`TRANSACCION`)
+) ENGINE=InnoDB AUTO_INCREMENT=1138 DEFAULT CHARSET=utf8mb4;
+/*!40101 SET character_set_client = @saved_cs_client */;
+
+--
+-- Table structure for table `ENCODINGS`
+--
+
+DROP TABLE IF EXISTS `ENCODINGS`;
+/*!40101 SET @saved_cs_client     = @@character_set_client */;
+/*!40101 SET character_set_client = utf8 */;
+CREATE TABLE `ENCODINGS` (
+  `ID_ENCODING` bigint(20) NOT NULL AUTO_INCREMENT,
+  `ID_EMPLEADO` int(11) NOT NULL,
+  `UUID` varchar(100) DEFAULT NULL,
+  `FICHERO_ORIGEN` varchar(128) DEFAULT NULL,
+  `ENCODING` varchar(3072) DEFAULT NULL,
+  KEY `ID_ENCODING` (`ID_ENCODING`),
+  KEY `FK_UUID` (`ID_EMPLEADO`),
+  CONSTRAINT `FK_UUID` FOREIGN KEY (`ID_EMPLEADO`) REFERENCES `EMPLEADOS` (`TRANSACCION`) ON DELETE CASCADE ON UPDATE CASCADE
+) ENGINE=InnoDB AUTO_INCREMENT=1199 DEFAULT CHARSET=utf8mb4;
+/*!40101 SET character_set_client = @saved_cs_client */;
+
+--
+-- Table structure for table `INCIDENCIAS`
+--
+
+DROP TABLE IF EXISTS `INCIDENCIAS`;
+/*!40101 SET @saved_cs_client     = @@character_set_client */;
+/*!40101 SET character_set_client = utf8 */;
+CREATE TABLE `INCIDENCIAS` (
+  `TRANSACCION` int(11) NOT NULL AUTO_INCREMENT,
+  `INCIDENCIA` varchar(4) NOT NULL,
+  `DESCRIPCION` varchar(50) NOT NULL,
+  `DESC_CORTA` varchar(15) NOT NULL,
+  `CONTROL` varchar(1) NOT NULL,
+  PRIMARY KEY (`TRANSACCION`)
+) ENGINE=InnoDB AUTO_INCREMENT=10 DEFAULT CHARSET=utf8mb4;
+/*!40101 SET character_set_client = @saved_cs_client */;
+
+--
+-- Table structure for table `MARCAJES`
+--
+
+DROP TABLE IF EXISTS `MARCAJES`;
+/*!40101 SET @saved_cs_client     = @@character_set_client */;
+/*!40101 SET character_set_client = utf8 */;
+CREATE TABLE `MARCAJES` (
+  `TRANSACCION` int(11) NOT NULL AUTO_INCREMENT,
+  `TARJETA` varchar(100) DEFAULT NULL,
+  `FECHA` date NOT NULL,
+  `HORA` time NOT NULL,
+  `INCIDENCIA` varchar(4) NOT NULL DEFAULT '',
+  `TERMINAL` varchar(100) DEFAULT NULL,
+  `ITIPO` tinyint(4) NOT NULL DEFAULT 0,
+  PRIMARY KEY (`TRANSACCION`)
+) ENGINE=InnoDB AUTO_INCREMENT=371 DEFAULT CHARSET=utf8mb4;
+/*!40101 SET character_set_client = @saved_cs_client */;
+/*!40103 SET TIME_ZONE=@OLD_TIME_ZONE */;
+
+/*!40101 SET SQL_MODE=@OLD_SQL_MODE */;
+/*!40014 SET FOREIGN_KEY_CHECKS=@OLD_FOREIGN_KEY_CHECKS */;
+/*!40014 SET UNIQUE_CHECKS=@OLD_UNIQUE_CHECKS */;
+/*!40101 SET CHARACTER_SET_CLIENT=@OLD_CHARACTER_SET_CLIENT */;
+/*!40101 SET CHARACTER_SET_RESULTS=@OLD_CHARACTER_SET_RESULTS */;
+/*!40101 SET COLLATION_CONNECTION=@OLD_COLLATION_CONNECTION */;
+/*!40111 SET SQL_NOTES=@OLD_SQL_NOTES */;
+
+-- Dump completed on 2022-09-23 18:56:34

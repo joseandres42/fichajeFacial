@@ -1,0 +1,32 @@
+{
+  "Terminal": 3,
+  "DB":{
+    "host":"localhost",
+    "port": <database-port>,
+    "database": "<database-name>",
+    "user": "<database-user>",
+    "password":" <database-password>"
+  },
+  "path":{
+    "basepath":"/usr/controlAcceso",
+    "people":"/people/",
+    "localPeople":"/localPeople/",
+    "images":"/assets/",
+    "logs":"/logs/"
+  },
+  "logging":{
+    "logfile_size": 10,
+    "logfile_count": 200,
+    "picture_count": 1000
+  },
+  "samba":{
+    "ip": "",
+    "port": "",
+    "path": "",
+    "user": "",
+    "password": ""
+  },
+  "rebootTime": "03:15",
+  "adminPassword": "0000",
+  "version": "2.16.003"
+}
